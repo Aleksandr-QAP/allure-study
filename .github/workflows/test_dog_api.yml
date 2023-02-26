@@ -3,7 +3,7 @@ run-name: allure-test
 on: [push]
 jobs:
   api-tests:
-    runs-on: python:3.10-alpine
+    runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
         - name: Set up Python 3.x

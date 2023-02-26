@@ -1,8 +1,32 @@
-name: Test copy-habr allure-api-test
-run-name: allure-test
-on: [push]
+name: main-workflow
+
+on:
+  push:
+    branches-ignore:
+      - '!master'
+
 jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        env:
+          GIT_TRACE: 1
+          GIT_CURL_VERBOSE: 1
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Check code style
+        if: always()
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install flake8
+          flake8
   api-tests:
+    needs: linter
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2

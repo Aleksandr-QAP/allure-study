@@ -17,7 +17,7 @@ jobs:
             pip install -r requirements.txt
         - name: Run Test
           if: always()
-          run: pytest -n=4 --alluredir=./allure-results tests/test_dog_api.py
+          run: pytest --alluredir=./allure-results tests/test_another_api.py
           continue-on-error: true
         - name: Get Allure history
           uses: actions/checkout@v2

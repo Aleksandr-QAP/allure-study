@@ -17,28 +17,28 @@ jobs:
             pip install -r requirements.txt
         - name: Run Test
           if: always()
-          run: python -m pytest tests/test_another_api.py
-#          run: pytest --alluredir=./allure-results tests/test_another_api.py
+#          run: python -m pytest tests/test_another_api.py
+          run: pytest --alluredir=./allure-results tests/test_another_api.py
           continue-on-error: true
-#        - name: Get Allure history
-#          uses: actions/checkout@v2
-#          if: always()
-#          continue-on-error: true
-#          with:
-#            ref: gh-pages
-#            path: gh-pages
+        - name: Get Allure history
+          uses: actions/checkout@v2
+          if: always()
+          continue-on-error: true
+          with:
+            ref: gh-pages
+            path: gh-pages
 
-#        - name: Allure Report action from marketplace
-#          uses: simple-elf/allure-report-action@master
-#          if: always()
-#          with:
-#            allure_results: allure-results
-#            allure_history: allure-history
-#
-#        - name: Deploy report to Github Pages
-#          if: always()
-#          uses: peaceiris/actions-gh-pages@v2
-#          env:
-#            PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#            PUBLISH_BRANCH: gh-pages
-#            PUBLISH_DIR: allure-history
+        - name: Allure Report action from marketplace
+          uses: simple-elf/allure-report-action@master
+          if: always()
+          with:
+            allure_results: allure-results
+            allure_history: allure-history
+
+        - name: Deploy report to Github Pages
+          if: always()
+          uses: peaceiris/actions-gh-pages@v2
+          env:
+            PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            PUBLISH_BRANCH: gh-pages
+            PUBLISH_DIR: allure-history

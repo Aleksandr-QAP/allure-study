@@ -6,26 +6,12 @@ on:
       - '!master'
 
 jobs:
-#  linter:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#        env:
-#          GIT_TRACE: 1
-#          GIT_CURL_VERBOSE: 1
-#
-#      - name: Set up Python 3.x
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: '3.x'
-
   api-tests:
-#    needs: linter
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v2
+        - uses: actions/checkout@v3
         - name: Set up Python 3.x
-          uses: actions/setup-python@v2
+          uses: actions/setup-python@v3
           with:
             python-version: '3.x'
 
@@ -39,7 +25,7 @@ jobs:
           run: python -m pytest --alluredir=./allure-results tests/test_another_api.py
           continue-on-error: true
         - name: Get Allure history
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
           if: always()
           continue-on-error: true
           with:
@@ -55,7 +41,7 @@ jobs:
 
         - name: Deploy report to Github Pages
           if: always()
-          uses: peaceiris/actions-gh-pages@v2
+          uses: peaceiris/actions-gh-pages@v3
           env:
             PERSONAL_TOKEN: ${{ secrets.TOKEN }}
             PUBLISH_BRANCH: gh-pages
